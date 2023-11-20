@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Busisiwe Khumalo</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+	  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  </head>
+  <body>
+    <nav class="nav">
+      <a href="index.html" class="nav-link">Home</a>
+	  <a href="about.html" class="nav-link">About</a>
+      <a href="Profile.html" class="nav-link">Profile</a>
+      <a href="Contact.html" class="nav-link">Contact</a>
+    </nav>
+	<div>
+		<button onclick="getWeather()">Get Weather</button>
+
+    <div id="weather-info">
+        <h2>Weather Forecast</h2>
+        <p id="location"></p>
+        <p id="temperature"></p>
+        <p id="description"></p>
+    </div>
+
+    <script>
+        function getWeather() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showWeather, showError);
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        function showWeather(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            // Replace 'YOUR_WEATHER_API_KEY' with your actual API key
+            const apiKey = 'db660175cf90923ff06839a07854a792';
+            const apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const location = data.name;
+                    const temperature = data.main.temp;
+                    const description = data.weather[0].description;
+
+                    document.getElementById('location').textContent = `Location: ${location}`;
+                    document.getElementById('temperature').textContent = `Temperature: ${temperature}°C`;
+                    document.getElementById('description').textContent = `Description: ${description}`;
+
+                    document.getElementById('weather-info').style.display = 'block';
+                })
+                .catch(error => console.error('Error fetching weather data:', error));
+        }
+
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+    </script>
+	</div>
+	 <section class="contact_form" id="Contact">
+        <h2 class="contact_heading">Contact</h2>
+        <div class="contact_container">
+            <div class="form_container">
+                <form action="#">
+                    <div class="form_input">
+                        <input type="text" name="fullname" id="fullname" placeholder="Full  Name" required>
+                    </div>
+                    <div class="form_input">
+                        <input type="email" name="email" id="email" placeholder="Email" required>
+                    </div>
+                    <div class="form_input">
+                        <textarea name="message" id="message" rows="10" placeholder="Message"></textarea>
+                    </div>
+                    <div class="form_input submit">
+                        <button type="submit" class="submit-btn">
+                            Send
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="map_container">
+                <a href="Google-Map/GoogleMap.html" class="marker-link">
+                    <i class='bx bxs-map-pin marker-icon'></i>
+                </a>
+                <div class="marker-description">
+                    <p>Click to locate yourself</p>
+                </div>
+            </div>
+        </div>
+    </section>
+	
+</body>
+</html>

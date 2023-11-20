@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family#poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins',sans-serif;
+  
+  background-image: url('GoogleImg/annie-spratt-pKpipZVVEC0-unsplash.jpg');
+}
+#map {
+  height: 500px;
+  width: 50%;
+  margin:100px auto;
+  border-radius: 7px;;
+  justify-content: center;
+}
+:root{
+  --background-main-color:#fff;
+--nav-background-color: #9799ee;
+--button-hover: #4b4dc3;
+  --bg-color:#25dfbe ;
+  --second-bg-color:#ff64a7 ;
+  --text-color: #fff ;
+  --second-text-color: white ;
+  --heading-one: #1ef7ec ;
+--button-color: #61a3a0 ;
+ 
+}
+
+nav {
+  
+  padding: 10px;
+  text-align: center;
+
+}
+
+.logo a {
+  text-decoration: none;
+  color:var(--text-color);
+  margin-top:12px;
+  font-size: 23px; 
+  font-weight: 600;
+  transform: rotate(-5deg); 
+  border-radius: 3px;
+  display: inline-block;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+/* media queries */
+
+@media (max-width:426px){
+  #map {
+    height: 600px;
+    width: 95%;
+    border-radius: 7px;
+  }
+}
+
+
+.logo a:hover {
+  transform: scale(1.1); 
+}  
